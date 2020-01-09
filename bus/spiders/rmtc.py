@@ -33,10 +33,10 @@ class RmtcSpider(scrapy.Spider):
         assert self.termo_busca or self.numero_ponto or self.numero_linha, AssertionError("Missing parameters")
         callback = self.validar_horario_de_viagem
         
-        if self.termo_busca:
-            formulario = {'txtTermoBuscaPonto': self.termo_busca, 'txtPontoId':''}
-        elif self.numero_ponto:
+        if self.numero_ponto:
             formulario = {'txtNumeroPonto': self.numero_ponto, 'txtNumeroLinha': self.numero_linha}
+        elif self.termo_busca:
+            formulario = {'txtTermoBuscaPonto': self.termo_busca, 'txtPontoId':''}
         else:
             formulario = {"txtNumLinha": self.numero_linha}
             callback = self.validar_planeje_sua_viagem
