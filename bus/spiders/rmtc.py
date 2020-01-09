@@ -55,7 +55,7 @@ class RmtcSpider(scrapy.Spider):
     def validar_horario_de_viagem(self, response):
         json_response = json.loads( response.body or '{"status":""}')
         if json_response['status'] == 'sucesso': 
-            numeros_ponto = re.findall(r'[0-9]+', json_response['urldestino'])
+            numeros_ponto = re.findall('[0-9]+', json_response['urldestino'])
             if 'linha' in json_response['urldestino']:
                 numeros_ponto.pop()
             for numero_ponto in numeros_ponto:
@@ -86,7 +86,7 @@ class RmtcSpider(scrapy.Spider):
     """
     def planeje_sua_viagem(self, response):
         script = response.selector.css("script").get()
-        pontos_json = re.findall(r'push\(\'(.*?)\'\);', script)
+        pontos_json = re.findall('push\(\'(.*?)\'\);', script)
         for ponto_json in pontos_json:
             ponto_json = json.loads( ponto_json )
             url = "/horariodeviagem/visualizar/ponto/{n_ponto}".format(n_ponto=ponto_json['id'])
