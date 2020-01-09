@@ -13,8 +13,8 @@ class RmtcSpider(scrapy.Spider):
     def __init__(self, termo_busca=None, numero_ponto=None, numero_linha=None, *args, **kwargs):
         super(RmtcSpider, self).__init__(*args, **kwargs)
         self.termo_busca = termo_busca
-        self.numero_ponto = re.sub(r"[^0-9\.]+", "", numero_ponto)
-        self.numero_linha = re.sub(r"[^0-9\.]+", "", numero_linha).lstrip("0")
+        self.numero_ponto = re.sub("[^0-9\.]+", "", numero_ponto)
+        self.numero_linha = re.sub("[^0-9\.]+", "", numero_linha).lstrip("0")
 
     """
         Response: Pagina da home
@@ -110,8 +110,8 @@ class RmtcSpider(scrapy.Spider):
                 "numero_linha": numero_linha.zfill(3), 
                 "horarios": {
                     'destino': linha.css('td::text')[1].get(), 
-                    'proximo': re.sub(r"[^0-9\.]+", "", linha.css('td::text')[2].get()), 
-                    'seguinte': re.sub(r"[^0-9\.]+", "", linha.css('td::text')[3].get())
+                    'proximo': re.sub("[^0-9\.]+", "", linha.css('td::text')[2].get()), 
+                    'seguinte': re.sub("[^0-9\.]+", "", linha.css('td::text')[3].get())
                 },
                 "endereco": endereco
             })
