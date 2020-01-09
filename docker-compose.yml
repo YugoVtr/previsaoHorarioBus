@@ -1,0 +1,11 @@
+version: "3"
+
+services: 
+    scrap:
+        build: ./crawler
+        command: scrapy crawl rmtc -o horario.json -a numero_ponto=1508
+        ports: 
+            - "3333:3333"
+        volumes: 
+            - ./crawler:/usr/app
+    
