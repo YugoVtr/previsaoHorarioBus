@@ -10,7 +10,7 @@ class RmtcSpider(scrapy.Spider):
     """
         inicia os parametros de execucao 
     """
-    def __init__(self, termo_busca=None, numero_ponto=None, numero_linha=None, *args, **kwargs):
+    def __init__(self, termo_busca="", numero_ponto="", numero_linha="", *args, **kwargs):
         super(RmtcSpider, self).__init__(*args, **kwargs)
         self.termo_busca = termo_busca
         self.numero_ponto = re.sub("[^0-9\.]+", "", numero_ponto)
